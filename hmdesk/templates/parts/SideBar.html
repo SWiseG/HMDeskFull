@@ -1,0 +1,64 @@
+<nav id="sidebar" class="sidebar js-sidebar">
+    <div class="sidebar-content js-simplebar">
+        <a class="sidebar-brand" href="{% url 'menu' %}">
+  <span class="align-middle">HMDesk</span>
+</a>
+
+        <ul class="sidebar-nav">
+            <li class="sidebar-header">
+                Páginas
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="index.html">
+                      <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard </span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="index.html">
+                      <i class="align-middle" data-feather="shopping-bag"></i> <span class="align-middle">Vendas </span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a data-bs-target="#formsCadastro" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
+                    <i class="align-middle" data-feather="clipboard"></i> <span class="align-middle">Cadastro <i class="align-middle" data-feather="chevron-down" style="width: 15px;height: 15px;"></i></span>
+                </a>
+                <ul id="formsCadastro" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Cliente </a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{% url 'produtos' %}"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Produto </a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Fornecedor </a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Categoria </a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a data-bs-target="#formsFinanceiro" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
+                    <i class="align-middle" data-feather="dollar-sign"></i> <span class="align-middle">Financeiro <i class="align-middle" data-feather="chevron-down" style="width: 15px;height: 15px;"></i></span>
+                </a>
+                <ul id="formsFinanceiro" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Fluxo de Caixa </a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Contas á Pagar </a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Notas Físcais </a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a data-bs-target="#formsOrcamento" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
+                    <i class="align-middle" data-feather="command"></i> <span class="align-middle">Orçamento <i class="align-middle" data-feather="chevron-down" style="width: 15px;height: 15px;"></i></span>
+                </a>
+                <ul id="formsOrcamento" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Lucros </a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Despesas </a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="index.html">
+                      <i class="align-middle" data-feather="box"></i> <span class="align-middle">Estoque </span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="index.html">
+                      <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">Relatórios </span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
