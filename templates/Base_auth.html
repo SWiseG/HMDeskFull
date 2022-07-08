@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>HMDesk - {% block title %} {% endblock title %}
+	
+	<link rel = "icon" href="{% static '/icons/hmdesk_ico.ico' %}" type = "image/x-icon">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="wrapper">
+		{% include "parts/SideBar.html" %}
+		{% include "parts/NavBar.html" %}
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">{% block titleModule %}{% endblock titleModule %}/<b>{% block titlePage %}{% endblock titlePage %}</b></h1>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title mb-0">{% block content %}{% endblock content %}</h5>
+								</div>
+								<div class="card-body">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+		{% include "parts/Footer.html" %}	
+		</div>
+	</div>
+	<script src="{% static 'scripts/app.js' %}"></script>
+</body>
+</html>
