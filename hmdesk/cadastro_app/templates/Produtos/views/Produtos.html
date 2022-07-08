@@ -16,7 +16,15 @@
             <div class="card-header">
                 <h5 class="card-title">Lista de Produtos</h5>
             </div>
-            
+            <table class="table table-bordered" id="table">
+                <thead>
+                    <tr>
+                        <th>Ações</th>
+                        <th>Id_Produto</th>
+                        <th type="descricao">Descrição</th>
+                        <th>Valor</th>   
+                    </tr>
+                </thead>
                 <tbody>
                     {% for obj in all_products %}
                     <tr>
