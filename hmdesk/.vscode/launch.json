@@ -1,0 +1,34 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Django",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}\\manage.py",
+      "args": ["runserver"],
+      "django": true,
+      "justMyCode": true
+    },
+    {
+      "name": "HMDesk Debbuger",
+      "python": "/Users/Desktop/Desktop/Pastas/PyDjango/hmdesk/Scripts/python",
+      "type": "python",
+      "request": "launch",
+      "program": "/Users/Desktop/Desktop/Pastas/PyDjango/django-project/hmdesk/manage.py",
+      "console": "internalConsole",
+      "args": ["runserver"]
+    },
+    {
+      "name": "Python: Arquivo Atual",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}
