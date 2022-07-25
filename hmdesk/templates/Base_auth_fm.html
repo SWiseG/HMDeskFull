@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>HMDesk - {% block title %} {% endblock title %}
+	
+	<link rel = "icon" href="{% static '/icons/hmdesk_ico.ico' %}" type = "image/x-icon">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'src_Base/scss/app.scss' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome6.1.1/css/all.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome6.1.1/css/fontawesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome6.1.1/css/regular.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fontawesome6.1.1/css/solid.min.css' %}">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	{% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> {% endcomment %}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+<body>
+	<div class="wrapper">
+		{% include "parts/SideBar.html" %}
+		{% include "parts/NavBar.html" %}
+		<main class="content">
+			<div class="container-fluid p-0">
+				<h1 class="h3 mb-3">{% block titleModule %}{% endblock titleModule %}/{% block titlePage %}{% endblock titlePage %}/<b>{% block titleAction %}{% endblock titleAction %}</b></h1>
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<h5 class="card-title">Cadastro de Novo {% block formName %}{% endblock formName %}</h5>
+						</div>
+						<div class="card-body">
+							<form method="POST">
+								{% csrf_token %}
+								{% block contentForm %}
+								{% endblock contentForm %}
+							</form>
+						</div>
+					</div>
+				</div>
+		</main>
+		{% include "parts/Footer.html" %}	
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="{% static 'scripts/app.js' %}"></script>
+</body>
+</html>
+				{% comment %} EXAMPLE FIELDS
+				<div class="mb-3">
+					<h1 class="h3 d-inline align-middle">Forms</h1>
+					<a class="badge bg-dark text-white ms-2" href="upgrade-to-pro.html">
+  						Get more form examples
+					</a>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-6">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">Input</h5>
+							</div>
+							<div class="card-body">
+								<input type="text" class="form-control" placeholder="Input">
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">Textarea</h5>
+							</div>
+							<div class="card-body">
+								<textarea class="form-control" rows="2" placeholder="Textarea"></textarea>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">Checkboxes</h5>
+							</div>
+							<div class="card-body">
+								<div>
+									<label class="form-check">
+										<input class="form-check-input" type="checkbox" value="">
+										<span class="form-check-label">
+										Option one is this and that&mdash;be sure to include why it's great
+										</span>
+									</label>
+									<label class="form-check">
+									<input class="form-check-input" type="checkbox" value="" disabled>
+									<span class="form-check-label">
+									Option two is disabled
+									</span>
+								</label>
+								</div>
+								<div>
+									<label class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox" value="option1">
+										<span class="form-check-label">
+										1
+										</span>
+									</label>
+									<label class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox" value="option2">
+										<span class="form-check-label">
+										2
+										</span>
+									</label>
+									<label class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox" value="option3" disabled>
+										<span class="form-check-label">
+										3
+										</span>
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">Read only</h5>
+							</div>
+							<div class="card-body">
+								<input class="form-control" type="text" placeholder="Readonly input" readonly>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-lg-6">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">Radios</h5>
+							</div>
+							<div class="card-body">
+								<div>
+									<label class="form-check">
+										<input class="form-check-input" type="radio" value="option1" name="radios-example" checked>
+										<span class="form-check-label">
+										Option one is this and that&mdash;be sure to include why it's great
+										</span>
+									</label>
+									<label class="form-check">
+										<input class="form-check-input" type="radio" value="option2" name="radios-example">
+										<span class="form-check-label">
+										Option two can be something else and selecting it will deselect option one
+										</span>
+									</label>
+									<label class="form-check">
+									<input class="form-check-input" type="radio" value="option3" name="radios-example" disabled>
+									<span class="form-check-label">
+									Option three is disabled
+									</span>
+								</label>
+								</div>
+								<div>
+									<label class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="inline-radios-example" value="option1">
+										<span class="form-check-label">
+										1
+										</span>
+									</label>
+									<label class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="inline-radios-example" value="option2">
+										<span class="form-check-label">
+										2
+										</span>
+									</label>
+									<label class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="inline-radios-example" value="option3" disabled>
+									<span class="form-check-label">
+									3
+									</span>
+								</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">Selects</h5>
+							</div>
+							<div class="card-body">
+								<select class="form-select mb-3">
+								<option selected>Open this select menu</option>
+								<option>One</option>
+								<option>Two</option>
+								<option>Three</option>
+								</select>
+
+								<select multiple class="form-control">
+								<option>One</option>
+								<option>Two</option>
+								<option>Three</option>
+								<option>Four</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">Disabled</h5>
+							</div>
+							<div class="card-body">
+								<div class="mb-3">
+									<label class="form-label">Disabled input</label>
+									<input type="text" class="form-control" placeholder="Disabled input" disabled>
+								</div>
+								<div class="mb-3">
+									<label class="form-label">Disabled select menu</label>
+									<select class="form-control" disabled>
+										<option>Disabled select</option>
+									</select>
+								</div>
+								<label class="form-check">
+								<input class="form-check-input" type="checkbox" value="" disabled>
+								<span class="form-check-label">
+									Can't check this
+								</span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div> {% endcomment %}

@@ -1,0 +1,35 @@
+{% extends 'Base_auth_fm.html' %}
+{% load static %}
+{% block title %}
+    Produtos</title>
+{% endblock title %}
+{% block titleModule %}
+    Cadastro
+{% endblock titleModule %}
+{% block titlePage %}
+    Produtos
+{% endblock titlePage %}
+{% block titleAction %}
+    Editar
+{% endblock titleAction %}
+{% block formName %}
+    Produto
+{% endblock formName %}
+{% block contentForm %}
+<div class="row">
+    <div class="mb-3 col-md-2">
+        <label class="form-label" for="descricao">Descrição</label>
+        <input type="text" class="form-control" id="descricao" name="descricao" placeholder="" value="{{produto.descricao}}">
+    </div>
+    <div class="mb-3 col-md-1">
+        <label class="form-label" for="valor_unitario_compra">Valor Compra</label>
+        <input type="number" class="form-control" id="valor_unitario_compra" name="valor_unitario_compra" min="0.00" max="10000.00" step="0.01" value="{{produto.valor_unitario_compra}}" />
+    </div>
+    <div class="mb-3 col-md-1">
+        <label class="form-label" for="valor_unitario_venda">Valor Venda</label>
+        <input type="number" class="form-control" id="valor_unitario_venda" name="valor_unitario_venda"  min="0.00" max="10000.00" step="0.01" value="{{produto.valor_unitario_venda}}" />
+    </div>
+</div>
+<button type="submit" class="btn btn-primary">SALVAR</button>
+<button onclick="window.location='{% url 'produto' %}';return false;" class="btn btn-danger">CANCELAR</button>
+{% endblock contentForm %}

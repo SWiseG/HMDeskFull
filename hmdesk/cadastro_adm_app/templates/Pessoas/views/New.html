@@ -1,0 +1,45 @@
+{% extends 'Base_auth_fm.html' %}
+{% load static %}
+{% block title %}
+    Pessoas</title>
+{% endblock title %}
+{% block titleModule %}
+    Cadastro
+{% endblock titleModule %}
+{% block titlePage %}
+    Pessoas
+{% endblock titlePage %}
+{% block titleAction %}
+    Novo
+{% endblock titleAction %}
+{% block formName %}
+    Pessoa
+{% endblock formName %}
+{% block contentForm %}
+<div class="row">
+    <div class="mb-3 col-md-4">
+        <label class="form-label" for="nome">Nome</label>
+        <input type="text" class="form-control" id="nome" name="nome" placeholder="">
+    </div>
+    <div class="mb-3 col-md-4">
+        <label class="form-label" for="cnpjcpf">CPF/CNPJ</label>
+        <input type="text" class="form-control" id="cnpjcpf" name="cnpjcpf" placeholder="">
+    </div>
+    <div class="mb-3 col-md-4">
+        <label class="form-label" for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="">
+    </div>
+</div>
+<div class="row">
+    <div class="mb-3 col-md-4">
+        <label class="form-label" for="telefone">Telefone</label>
+        <input type="text" class="form-control" id="telefone" name="telefone" placeholder="">
+    </div>
+    <div class="mb-3 col-md-4">
+        <label class="form-label" for="rede_social">Rede Social</label>
+        <input type="text" class="form-control" id="rede_social" name="rede_social" placeholder="">
+    </div>
+</div>
+<button type="submit" class="btn btn-primary">SALVAR</button>
+<button onclick="window.location='{% url 'pessoa' %}';return false;" class="btn btn-danger">CANCELAR</button>
+{% endblock contentForm %}

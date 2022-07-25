@@ -1,0 +1,48 @@
+{% extends 'Base_auth_dt.html' %}
+{% load static %}
+{% block title %}
+    Pessoas</title>
+{% endblock title %}
+{% block titleModule %}
+    Cadastro - ADM
+{% endblock titleModule %}
+{% block titlePage %}
+    Pessoa
+{% endblock titlePage %}
+{% block titleAction %}
+    Detalhes
+{% endblock titleAction %}
+{% block titleContentHeader %}
+    Pessoa
+{% endblock titleContentHeader %}
+{% block contentDetail %}
+<div class="row">
+    <div class="mb-3 col-md-4">
+        <p class="card-title detail">Descrição: {{ pessoa.nome}}</p>
+    </div>
+    <div class="mb-3 col-md-4">
+        <p class="card-title detail">Valor Compra: {{ pessoa.cnpjcpf}}</p>
+    </div>
+    <div class="mb-3 col-md-4">
+        <p class="card-title detail">Valor Venda: {{ pessoa.email}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="mb-3 col-md-4">
+        <p class="card-title detail">Descrição: {{ pessoa.telefone}}</p>
+    </div>
+    <div class="mb-3 col-md-4">
+        <p class="card-title detail">Valor Compra: {{ pessoa.rede_social}}</p>
+    </div>
+</div>
+<button id="voltar" type="submit" class="btn btn-secondary">VOLTAR</button>
+{% endblock contentDetail %}
+{% block scriptsButtonVoltar %}
+<script>
+    document.getElementById("voltar").onclick = function(){
+        window.location.href = '{% url 'produto' %}'
+        return false;
+    };
+</script>
+{% endblock scriptsButtonVoltar %}
+

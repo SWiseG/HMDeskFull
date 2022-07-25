@@ -1,0 +1,506 @@
+{% extends 'Base_auth_tb.html' %}
+{% load static %}
+{% block title %}
+    Pessoas</title>
+{% endblock title %}
+{% block titleModule %}
+    Cadastro
+{% endblock titleModule %}
+{% block titlePage %}
+    Pessoas
+{% endblock titlePage %}
+{% block content %}
+    <!--<div class="col-12 col-xl-6">-->
+    <div>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Lista de Pessoas</h5>
+            </div>
+            <table class="table table-bordered" id="table">
+                <thead>
+                    <tr>
+                        <th class="notexport">Ações</th>
+                        <th class="defaultNotVisible">Id_Pessoa</th>
+                        <th>Nome</th>
+                        <th>CPF/CNPJ</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Rede Social</th>        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for person in all_people %}
+                    <tr>
+                        <td class="table-action" style="width: 5px">
+                            <a class="nav-link d-sm-inline-block no-sort" href="#" data-bs-toggle="dropdown" id="dropdownAction">
+                                <i class="align-middle" data-feather="menu" style="color: #212529"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownAction" >
+                                <a href="{% url 'pessoa_detail' person.id_pessoa %}"><i class="fa-regular fa-file-zipper btn-style-custom-combo align-middle"></i><a href="{% url 'pessoa_detail' person.id_pessoa %}" class="btn-style-custom-text">Detalhes</a></a>
+                                <div class="dropdown-divider"></div>
+                                <a href="{% url 'pessoa_edit' person.id_pessoa %}"><i class="fa-regular fa-pen-to-square btn-style-custom-combo align-middle"></i><a href="{% url 'pessoa_edit' person.id_pessoa %}" class="btn-style-custom-text">Editar</a></a>
+                                <div class="dropdown-divider"></div>
+                                <a href="{% url 'pessoa_delete' person.id_pessoa %}"><i class="fa-regular fa-trash-can btn-style-custom-combo align-middle"></i><a href="{% url 'pessoa_delete' person.id_pessoa %}" class="btn-style-custom-text">Excluir</a></a>
+                            </div>
+                        </td>
+
+                        <td>{{ person.id_pessoa}}</td>                       
+                        <td>{{ person.nome}}</td>
+                        <td>{{ person.cnpjcpf}}</td>
+                        <td>{{ person.email}}</td>
+                        <td>{{ person.telefone}}</td>
+                        <td>{{ person.rede_social}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}
+{% block scriptsTable %}
+    <script>
+        $(document).ready(function(){
+            function getBase64FromImageUrl(url) {
+                // Converte um img URL para data URL
+                var img = new Image();
+                    img.crossOrigin = "anonymous";
+                img.onload = function () {
+                    var canvas = document.createElement("canvas");
+                    canvas.width =this.width;
+                    canvas.height =this.height;
+                    var ctx = canvas.getContext("2d");
+                    ctx.drawImage(this, 0, 0);
+                    var dataURL = canvas.toDataURL("image/png");
+                    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+                };
+                img.src = url;
+            }
+            var table = $("#table").DataTable({
+                paging: true,
+                columnDefs: [ {
+                    targets: 'no-sort',
+                    orderable: false,
+                    searchable: false,
+                    width: "5%",
+                } ],
+                columnDefs: [ {
+                    targets: 'defaultNotVisible',
+                    visible: false, 
+                } ],
+                language:{
+                    "emptyTable": "Nenhum registro encontrado",
+                    "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "infoEmpty": "Mostrando 0 até 0 de 0 registros",
+                    "infoFiltered": "(Filtrados de _MAX_ registros)",
+                    "infoThousands": ".",
+                    "loadingRecords": "Carregando...",
+                    "processing": "Processando...",
+                    "zeroRecords": "Nenhum registro encontrado",
+                    "search": "Pesquisar:",
+                    "paginate": {
+                        "next": '<span class="fa-solid fa-angle-right"></span>',
+                        "previous": '<span class="fa-solid fa-angle-left"></span>',
+                        "first": "Primeiro",
+                        "last": "Último"
+                    },
+                    "aria": {
+                        "sortAscending": ": Ordenar colunas de forma ascendente",
+                        "sortDescending": ": Ordenar colunas de forma descendente"
+                    },
+                    "select": {
+                        "rows": {
+                            "_": "Selecionado %d linhas",
+                            "1": "Selecionado 1 linha"
+                        },
+                        "cells": {
+                            "1": "1 célula selecionada",
+                            "_": "%d células selecionadas"
+                        },
+                        "columns": {
+                            "1": "1 coluna selecionada",
+                            "_": "%d colunas selecionadas"
+                        }
+                    },
+                    "buttons": {
+                        "copySuccess": {
+                            "1": "Uma linha copiada com sucesso",
+                            "_": "%d linhas copiadas com sucesso"
+                        },
+                        "collection": "Coleção  <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
+                        "colvis": "Visibilidade da Coluna",
+                        "colvisRestore": "Restaurar Visibilidade",
+                        "copy": "Copiar",
+                        "copyKeys": "Pressione ctrl ou u2318 + C para copiar os dados da tabela para a área de transferência do sistema. Para cancelar, clique nesta mensagem ou pressione Esc..",
+                        "copyTitle": "Copiar para a Área de Transferência",
+                        "csv": "CSV",
+                        "excel": "Excel",
+                        "pageLength": {
+                            "-1": "Mostrar todos os registros",
+                            "_": "Mostrar %d registros"
+                        },
+                        "pdf": "PDF",
+                        "print": "Imprimir",
+                        "createState": "Criar estado",
+                        "removeAllStates": "Remover todos os estados",
+                        "removeState": "Remover",
+                        "renameState": "Renomear",
+                        "savedStates": "Estados salvos",
+                        "stateRestore": "Estado %d",
+                        "updateState": "Atualizar"
+                    },
+                    "autoFill": {
+                        "cancel": "Cancelar",
+                        "fill": "Preencher todas as células com",
+                        "fillHorizontal": "Preencher células horizontalmente",
+                        "fillVertical": "Preencher células verticalmente"
+                    },
+                    "lengthMenu": "Exibir _MENU_ resultados por página",
+                    "searchBuilder": {
+                        "add": "Adicionar Condição",
+                        "button": {
+                            "0": '<span class="fa-solid fa-filter btn-style-custom"></span><a class="btn-style-custom-text">Filtros</a>',
+                            "_": '<span class="fa-solid fa-filter btn-style-custom"></span><a class="btn-style-custom-text">Filtros (%d)</a>'
+                        },
+                        "clearAll": "Limpar Tudo",
+                        "condition": "Condição",
+                        "conditions": {
+                            "date": {
+                                "after": "Depois",
+                                "before": "Antes",
+                                "between": "Entre",
+                                "empty": "Vazio",
+                                "equals": "Igual",
+                                "not": "Não",
+                                "notBetween": "Não Entre",
+                                "notEmpty": "Não Vazio"
+                            },
+                            "number": {
+                                "between": "Entre",
+                                "empty": "Vazio",
+                                "equals": "Igual",
+                                "gt": "Maior Que",
+                                "gte": "Maior ou Igual a",
+                                "lt": "Menor Que",
+                                "lte": "Menor ou Igual a",
+                                "not": "Não",
+                                "notBetween": "Não Entre",
+                                "notEmpty": "Não Vazio"
+                            },
+                            "string": {
+                                "contains": "Contém",
+                                "empty": "Vazio",
+                                "endsWith": "Termina Com",
+                                "equals": "Igual",
+                                "not": "Não",
+                                "notEmpty": "Não Vazio",
+                                "startsWith": "Começa Com",
+                                "notContains": "Não contém",
+                                "notStarts": "Não começa com",
+                                "notEnds": "Não termina com"
+                            },
+                            "array": {
+                                "contains": "Contém",
+                                "empty": "Vazio",
+                                "equals": "Igual à",
+                                "not": "Não",
+                                "notEmpty": "Não vazio",
+                                "without": "Não possui"
+                            }
+                        },
+                        "data": "Dados",
+                        "deleteTitle": "Excluir regra de filtragem",
+                        "logicAnd": "E",
+                        "logicOr": "Ou",
+                        "title": {
+                            "0": '<span class="fa-solid fa-filter btn-style-custom"></span><a class="btn-style-custom-text">Filtros</a>',
+                            "_": '<span class="fa-solid fa-filter btn-style-custom"></span><a class="btn-style-custom-text">Filtros (%d)</a>'
+                        },
+                        "value": "Valor",
+                        "leftTitle": "Critérios Externos",
+                        "rightTitle": "Critérios Internos"
+                    },
+                    "searchPanes": {
+                        "clearMessage": "Limpar Tudo",
+                        "collapse": {
+                            "0": "Painéis de Pesquisa",
+                            "_": "Painéis de Pesquisa (%d)"
+                        },
+                        "count": "{total}",
+                        "countFiltered": "{shown} ({total})",
+                        "emptyPanes": "Nenhum Painel de Pesquisa",
+                        "loadMessage": "Carregando Painéis de Pesquisa...",
+                        "title": "Filtros Ativos",
+                        "showMessage": "Mostrar todos",
+                        "collapseMessage": "Fechar todos"
+                    },
+                    "thousands": ".",
+                    "datetime": {
+                        "previous": '<span class="bi bi-arrow-left-circle-fill"></span>',
+                        "next": '<span class="bi bi-arrow-right-circle-fill"></span>',
+                        "hours": "Hora",
+                        "minutes": "Minuto",
+                        "seconds": "Segundo",
+                        "amPm": [
+                            "am",
+                            "pm"
+                        ],
+                        "unknown": "-",
+                        "months": {
+                            "0": "Janeiro",
+                            "1": "Fevereiro",
+                            "10": "Novembro",
+                            "11": "Dezembro",
+                            "2": "Março",
+                            "3": "Abril",
+                            "4": "Maio",
+                            "5": "Junho",
+                            "6": "Julho",
+                            "7": "Agosto",
+                            "8": "Setembro",
+                            "9": "Outubro"
+                        },
+                        "weekdays": [
+                            "Domingo",
+                            "Segunda-feira",
+                            "Terça-feira",
+                            "Quarta-feira",
+                            "Quinte-feira",
+                            "Sexta-feira",
+                            "Sábado"
+                        ]
+                    },
+                    "editor": {
+                        "close": "Fechar",
+                        "create": {
+                            "button": "Novo",
+                            "submit": "Criar",
+                            "title": "Criar novo registro"
+                        },
+                        "edit": {
+                            "button": "Editar",
+                            "submit": "Atualizar",
+                            "title": "Editar registro"
+                        },
+                        "error": {
+                            "system": "Ocorreu um erro no sistema (<a target=\"\\\" rel=\"nofollow\" href=\"\\\">Mais informações<\/a>)."
+                        },
+                        "multi": {
+                            "noMulti": "Essa entrada pode ser editada individualmente, mas não como parte do grupo",
+                            "restore": "Desfazer alterações",
+                            "title": "Multiplos valores",
+                            "info": "Os itens selecionados contêm valores diferentes para esta entrada. Para editar e definir todos os itens para esta entrada com o mesmo valor, clique ou toque aqui, caso contrário, eles manterão seus valores individuais."
+                        },
+                        "remove": {
+                            "button": "Remover",
+                            "confirm": {
+                                "_": "Tem certeza que quer deletar %d linhas?",
+                                "1": "Tem certeza que quer deletar 1 linha?"
+                            },
+                            "submit": "Remover",
+                            "title": "Remover registro"
+                        }
+                    },
+                    "decimal": ",",
+                    "stateRestore": {
+                        "creationModal": {
+                            "button": "Criar",
+                            "columns": {
+                                "search": "Busca de colunas",
+                                "visible": "Visibilidade da coluna"
+                            },
+                            "name": "Nome:",
+                            "order": "Ordernar",
+                            "paging": "Paginação",
+                            "scroller": "Posição da barra de rolagem",
+                            "search": "Busca",
+                            "searchBuilder": "Mecanismo de busca",
+                            "select": "Selecionar",
+                            "title": "Criar novo estado",
+                            "toggleLabel": "Inclui:"
+                        },
+                        "duplicateError": "Já existe um estado com esse nome",
+                        "emptyError": "Não pode ser vazio",
+                        "emptyStates": "Nenhum estado salvo",
+                        "removeConfirm": "Confirma remover %s?",
+                        "removeError": "Falha ao remover estado",
+                        "removeJoiner": "e",
+                        "removeSubmit": "Remover",
+                        "removeTitle": "Remover estado",
+                        "renameButton": "Renomear",
+                        "renameLabel": "Novo nome para %s:",
+                        "renameTitle": "Renomear estado"
+                    }
+                },
+                dom: "<'row'<'col-sm-12 col-md-8'B><'col-sm-12 col-md-4'f>>" + "<'red-mage row'>" +
+                "<'row'<'col-sm-12'tr>>" + "<'red-mage row'>" +
+                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                colReorder: true,
+                pagelenght: 10,
+                buttons: [
+                    {
+                        className: "btn-customized fa-lg",
+                        titleAttr: 'Novo',
+                        text: '<span class="fa-regular fa-square-plus btn-style-custom"></span><a class="btn-style-custom-text">Novo</a>',
+                        action: function (e, dt, node, config)
+                        {
+                            //Manda para url Especifica
+                            window.location.href = '{% url 'pessoa_new' %}';
+                        }
+                    },
+                    {
+                        className: "btn-customized fa-lg btn-style-custom",
+                        extend: 'searchBuilder',
+                        config: {
+                            depthLimit: 3
+                        },
+                        titleAttr: 'Filtros'
+                    },
+                    {
+                        className: "btn-customized fa-lg",
+                        columns: 'th:nth-child(n+2)',
+                        extend:    'colvis',
+                        text:      '<span class="fa-solid fa-table-columns btn-style-custom"></span><a class="btn-style-custom-text">Visibilidade</a>',
+                        titleAttr: 'Visibilidade da coluna'
+                        
+                    },
+                    {
+                    className: "btn-customized fa-lg",
+                    extend: 'collection',
+                    autoClose: 'true',
+                    fade: true,
+                    text: '<span class="fa-solid fa-file-lines btn-style-custom" style="font-size: 15px"></span><a class="btn-style-custom-text">Gerenciar Relatórios</a>', 
+                    buttons: 
+                    [
+                        {
+                            className: "btn-customized fa-lg btn-style-custom",
+                            extend:    'pdfHtml5',
+                            text:      '<span class="fa-solid fa-file-pdf btn-style-custom"></span><a class="btn-style-custom-text">PDF</a>',
+                            titleAttr: 'Download in PDF',
+                            orientation: 'landscape', //portrait
+                            pageSize: 'A4', //A3 , A5 , A6 , legal , letter
+                            exportOptions: {
+                                columns: ':visible:not(.notexport)',
+                                search: 'applied',
+                                order: 'applied'
+                            },
+                            customize: function (doc) {
+                                //Remove the title created by datatTables
+                                doc.content.splice(0,1);
+                                //Create a date string that we use in the footer. Format is dd-mm-yyyy
+                                var now = new Date();
+                                var jsDate = now.getDate()+'-'+(now.getMonth()+1)+'-'+now.getFullYear();
+                                // Logo converted to base64
+                                // var logo = getBase64FromImageUrl('https://datatables.net/media/images/logo.png');
+                                // The above call should work, but not when called from codepen.io
+                                // So we use a online converter and paste the string in.
+                                // Done on http://codebeautify.org/image-to-base64-converter
+                                // It's a LONG string scroll down to see the rest of the code !!!
+                                var logo = 'data:image/jpeg;base64,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ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA=';
+                                // A documentation reference can be found at
+                                // https://github.com/bpampuch/pdfmake#getting-started
+                                // Set page margins [left,top,right,bottom] or [horizontal,vertical]
+                                // or one number for equal spread
+                                // It's important to create enough space at the top for a header !!!
+                                doc.pageMargins = [20,60,20,30];
+                                // Set the font size fot the entire document
+                                doc.defaultStyle.fontSize = 7;
+                                // Set the fontsize for the table header
+                                doc.styles.tableHeader.fontSize = 7;
+                                // Create a header object with 3 columns
+                                // Left side: Logo
+                                // Middle: brandname
+                                // Right side: A document title
+                                doc['header']=(function() {
+                                    return {
+                                        columns: [
+                                            {
+                                                image: logo,
+                                                width: 24
+                                            },
+                                            {
+                                                alignment: 'left',
+                                                italics: true,
+                                                text: 'dataTables',
+                                                fontSize: 18,
+                                                margin: [10,0]
+                                            },
+                                            {
+                                                alignment: 'right',
+                                                fontSize: 14,
+                                                text: 'Custom PDF export with dataTables'
+                                            }
+                                        ],
+                                        margin: 20
+                                    }
+                                });
+                                // Create a footer object with 2 columns
+                                // Left side: report creation date
+                                // Right side: current page and total pages
+                                doc['footer']=(function(page, pages) {
+                                    return {
+                                        columns: [
+                                            {
+                                                alignment: 'left',
+                                                text: ['Created on: ', { text: jsDate.toString() }]
+                                            },
+                                            {
+                                                alignment: 'right',
+                                                text: ['page ', { text: page.toString() },	' of ',	{ text: pages.toString() }]
+                                            }
+                                        ],
+                                        margin: 20
+                                    }
+                                });
+                                // Change dataTable layout (Table styling)
+                                // To use predefined layouts uncomment the line below and comment the custom lines below
+                                // doc.content[0].layout = 'lightHorizontalLines'; // noBorders , headerLineOnly
+                                var objLayout = {};
+                                objLayout['hLineWidth'] = function(i) { return .5; };
+                                objLayout['vLineWidth'] = function(i) { return .5; };
+                                objLayout['hLineColor'] = function(i) { return '#aaa'; };
+                                objLayout['vLineColor'] = function(i) { return '#aaa'; };
+                                objLayout['paddingLeft'] = function(i) { return 4; };
+                                objLayout['paddingRight'] = function(i) { return 4; };
+                                doc.content[0].layout = objLayout;
+                            }
+                        },
+                        {
+                            extend: 'spacer',
+                            style: 'bar'
+                        },
+                        {
+                            
+                            className: "btn-customized fa-lg btn-style-custom",
+                            extend:    'csvHtml5',
+                            text:      '<span class="fa-solid fa-file-csv btn-style-custom"></span><a class="btn-style-custom-text">CSV</a>',
+                            titleAttr: 'Download in CSV',
+                            exportOptions: {
+                                columns: ':visible:not(.notexport)',
+                                search: 'applied',
+                                order: 'applied'
+                            },
+                        },
+                        {
+                            extend: 'spacer',
+                            style: 'bar'
+                        },
+                        {
+                            className: "btn-customized fa-lg btn-style-custom",
+                            extend:    'excelHtml5',
+                            text:      '<span class="fa-solid fa-file-excel btn-style-custom"></span><a class="btn-style-custom-text">EXCEL</a>',
+                            titleAttr: 'Download in Excel',
+                            exportOptions: {
+                                columns: ':visible:not(.notexport)',
+                                search: 'applied',
+                                order: 'applied'
+                            },
+                        },
+                    ]
+                },
+                ]
+            });                
+            });
+            $('#table').removeClass( 'display' ).addClass('table table-striped table-bordered');
+
+    </script>
+{% endblock scriptsTable %}

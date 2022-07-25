@@ -24,9 +24,17 @@
                 </a>
                 <ul id="formsCadastro" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
                     <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Cliente </a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="{% url 'produtos' %}"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Produto </a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{% url 'produto' %}"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Produto </a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Fornecedor </a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Categoria </a></li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a data-bs-target="#formsCadastroADM" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
+                    <i class="align-middle" data-feather="airplay"></i> <span class="align-middle">Cadastro - ADM <i class="align-middle" data-feather="chevron-down" style="width: 15px;height: 15px;"></i></span>
+                </a>
+                <ul id="formsCadastroADM" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" href="{% url 'pessoa' %}"><i class="align-middle" data-feather="arrow-right" style="width: 2rem;"></i>Pessoa </a></li>
                 </ul>
             </li>
             <li class="sidebar-item">
